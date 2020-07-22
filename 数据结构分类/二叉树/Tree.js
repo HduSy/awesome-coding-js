@@ -14,6 +14,9 @@ function Tree() {
     this.root = null;
 }
 
+/**
+ * 构造二叉搜索树
+ */
 Tree.prototype = {
     insert: function (data) {
         let node = new Node(data, null, null);
@@ -22,7 +25,7 @@ Tree.prototype = {
             return;
         }
         let current = this.root;
-        let parent = null;
+        let parent = null; //除根节点外无父节点
         while (current) {
             parent = current;
             if (data < parent.data) {

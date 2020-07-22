@@ -1,5 +1,7 @@
 // 去重
-const unique = (arr) => [...new Set(arr)]
+let unique = (arr) => [...new Set(arr)]
+unique = arr => Array.from(new Set(arr))
+unique = arr => arr.filter((item, index) => arr.indexOf(item) === index)
 //扁平化
 const flat = (arr) => {
     let res = []
