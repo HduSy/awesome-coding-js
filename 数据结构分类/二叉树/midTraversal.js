@@ -37,8 +37,8 @@ function middleTraversal(root) {
 }
 
 let selfCode = function (root) {
-    let result = []
     let stack = []
+    let res = []
     let current = root
     while (current || stack.length > 0) {
         while (current) {
@@ -46,8 +46,7 @@ let selfCode = function (root) {
             current = current.left
         }
         current = stack.pop()
-        result.push(current.data)
+        res.push(current)
         current = current.right
     }
-
 }
