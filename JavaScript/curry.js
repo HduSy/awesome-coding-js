@@ -68,7 +68,7 @@ function carling(fn, ...args) {
     return function (...nextArgs) {
         let allArgs = [...args, ...nextArgs]
         if (nextArgs.length === 0) {
-            return fn.apply(fn, allArgs)
+            return fn.apply(null, allArgs)
         }
         return carling(fn, ...allArgs)
     }
