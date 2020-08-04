@@ -16,3 +16,12 @@ function myInstanceof(target, origin) {
         return false;
     }
 }
+function f(target,origin) {
+    let proto = target.__proto__
+    if(proto){
+        if (proto===origin.prototype)
+            return true
+        else
+            return f(proto,origin)
+    }
+}
