@@ -12,7 +12,7 @@ function currying(fn, ...args1) {
         if (args2.length === 0) {
             return fn.apply(this, allArgs)
         } else {
-            return currying(fn, ...allArgs)
+            return currying(fn, ...allArgs) //注意有扩展运算符
         }
     }
 }

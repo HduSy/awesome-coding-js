@@ -84,3 +84,23 @@ function selfCurring(fn, ...args1) {
         return selfCurring(fn, allArgs)
     }
 }
+
+/**
+ * real
+ * @returns {any}
+ */
+function currAdd() {
+    let args1 = Array.prototype.slice.call(arguments)
+    let _add = function (...args2) {
+        args1 = [...args1, ...args2] //必须对原数组进行修改concat失败
+        //返回一个函数去接受剩余参数
+        return _add
+    }
+    _add.toString = function () {
+        return args1.reduce((pre, cur) => pre + cur, 0)
+    }
+    //返回一个函数去接受剩余参数
+    return _add
+}
+
+console.log(currAdd(1, 2, 3)(1, 2)(2).toString())

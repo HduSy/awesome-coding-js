@@ -1,10 +1,11 @@
 function ajax(url, method = 'get', param = {}) {
     return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest()
         const paramString = getParamString(param)
         if (method == 'get' && paramString) {
             url.indexOf('?') > -1 ? url += paramString : url += `?${paramString}`
         }
+        //get\post通用部分
+        const xhr = new XMLHttpRequest()
         xhr.open(method, url)
         xhr.onload = function () {
             const result = {
@@ -35,13 +36,12 @@ function ajax(url, method = 'get', param = {}) {
         } else {
             xhr.send()
         }
-
-        function getParamString(param) {
-            let dataString = ''
-            for (let key in param) {
-                dataString += `${key}=${param[key]}&`
-            }
-            return dataString
-        }
     })
+}
+function getParamString(param) {
+    let dataString = ''
+    for (let key in param) {
+        dataString += `${key}=${param[key]}&`
+    }
+    return dataString
 }
