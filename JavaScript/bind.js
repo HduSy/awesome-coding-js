@@ -1,3 +1,9 @@
+/**
+ * bind未写出来得多看看
+ * @param context
+ * @param args1
+ * @returns {undefined|F}
+ */
 Function.prototype.myBind = function (context, ...args1) {
     if (this === Function.prototype)
         return undefined
