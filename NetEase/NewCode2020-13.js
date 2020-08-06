@@ -1,3 +1,9 @@
+/**
+ * 2
+ 7
+ 9
+ * @type {module:readline}
+ */
 const readline = require('readline');
 rl = readline.createInterface({
     input: process.stdin,
