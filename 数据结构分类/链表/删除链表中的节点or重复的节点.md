@@ -21,7 +21,6 @@
           node = node.next;
         }
         node.next = null;
-        node = null;
       }
       return node;
     };
