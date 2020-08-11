@@ -1,36 +1,23 @@
-function S(n) {
-    if (n < 10)
-        return n
-    let y = n % 9
-    let res = []
-    if (y) {
-        res.push(y)
+/*function ListNode(x){
+    this.val = x;
+    this.next = null;
+}*/
+function FindKthToTail(head, k)
+{
+    // write code here
+    let pre = new ListNode(-1)
+    pre.next = head
+    for(let i = 0;i<k;i++){
+        if (pre.next){
+            pre = pre.next
+        }else {
+            return false //k大于链表本身长度
+        }
     }
-    let z = parseInt(n / 9)
-    for (let i = 0; i < z; i++) {
-        res.push(9)
+    let headNode = head
+    while (pre.next){
+        pre = pre.next
+        headNode = headNode.next
     }
-    res.sort((a, b) => a - b)
-    return res.join('')
+    return headNode
 }
-
-/**
- * 使用字符串操作写出更加简洁的代码
- * @param n
- * @returns {string}
- * @constructor
- */
-function S(n) {
-    let res = ''
-    let z = parseInt(n / 9)
-    let y = n % 9
-    for (let i = 0; i < z; i++) {
-        res += '9'
-    }
-    if (y) {
-        res = y + res
-    }
-    return res
-}
-
-console.log(S(20))
