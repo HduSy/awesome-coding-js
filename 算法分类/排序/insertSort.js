@@ -28,3 +28,20 @@ function insertSort(array) {
 let arr = [1, 2, 5, 4, 3]
 insertSort(arr)
 console.log(arr)
+
+function selfInsertSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let k = i
+        for (let j = i - 1; j >= 0; j--) {
+            if (arr[j] > arr[k]) {
+                [arr[j], arr[k]] = [arr[k], arr[j]]
+                k = j
+            } else {
+                break
+            }
+        }
+    }
+    return arr
+}
+
+console.log(selfInsertSort(arr))

@@ -20,3 +20,18 @@ function selectSort(array) {
 let arr = [1, 2, 5, 4, 3]
 selectSort(arr)
 console.log(arr)
+
+function selfSelectSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let minIndex = i
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[minIndex] > arr[j]) {
+                minIndex = j
+            }
+        }
+        [arr[minIndex], arr[i]] = [arr[minIndex], arr[i]]
+    }
+    return arr
+}
+
+console.log(selfSelectSort(arr))
