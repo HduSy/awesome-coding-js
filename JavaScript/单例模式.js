@@ -38,3 +38,20 @@ function createArrayFunc(arr) {
 let arr = [0, 1, 2]
 createArrayFunc(arr)
 console.log(arr[2]())
+
+function SingleTon(name) {
+    this.name = name
+}
+
+SingleTon.getInstance = (function () {
+    let instance
+    return function (name) {
+        if (!instance) {
+            instance = new SingleTon(name)
+        }
+        return instance
+    }
+})()
+a = SingleTon.getInstance('a')
+b = SingleTon.getInstance('b')
+console.log(a === b)
