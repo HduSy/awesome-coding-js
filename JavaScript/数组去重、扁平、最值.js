@@ -7,6 +7,7 @@ let testArr = [1, 2, 3, 3, 4]
 function unique(arr) {
     let container = {}
     return arr.filter((item, index) => {
+        // container[item]=true 返回值为true
         return container.hasOwnProperty(item) ? false : container[item] = true
     })
 }
@@ -84,6 +85,11 @@ function flattenByDeep(array, deep = 1) {
 
 console.log(flattenByDeep(testArr, 1)) //[ 1, 2, 3, 4, [ 5 ] ]
 console.log(flattenByDeep(testArr, 2)) //[ 1, 2, 3, 4, 5 ]
+
+function flatApi(arr, deep) {
+    return Array.prototype.flat.call(arr, deep)
+}
+
 /**
  * 最值
  */
