@@ -1,12 +1,12 @@
-function Node(data, left, right) {
-    this.data = data;
+function Node(val, left, right) {
+    this.val = val;
     this.left = left;
     this.right = right;
 }
 
 Node.prototype = {
     show: function () {
-        console.log(this.data);
+        console.log(this.val);
     }
 }
 
@@ -18,8 +18,8 @@ function Tree() {
  * 构造二叉搜索树
  */
 Tree.prototype = {
-    insert: function (data) {
-        let node = new Node(data, null, null);
+    insert: function (val) {
+        let node = new Node(val, null, null);
         if (!this.root) {
             this.root = node;
             return;
@@ -28,7 +28,7 @@ Tree.prototype = {
         let parent = null; //除根节点外无父节点
         while (current) {
             parent = current;
-            if (data < parent.data) {
+            if (val < parent.val) {
                 current = current.left;
                 if (!current) {
                     parent.left = node;
@@ -93,33 +93,34 @@ Tree.prototype = {
         let dright = this.getDeep(node.right, deep);
         return Math.max(dleft, dright);
     },
-    getNode: function (data, node) {
+    getNode: function (val, node) {
         if (node) {
-            if (data === node.data) {
+            if (val === node.val) {
                 return node
-            } else if (data < node.data) {
-                return this.getNode(data, node.left)
+            } else if (val < node.val) {
+                return this.getNode(val, node.left)
             } else {
-                return this.getNode(data, node.right)
+                return this.getNode(val, node.right)
             }
         } else {
             return null
         }
     }
 }
-
-// let t = new Tree()
-// t.insert(3)
-// t.insert(8)
-// t.insert(1)
-// t.insert(2)
-// t.insert(5)
-// t.insert(7)
-// t.insert(6)
-// t.insert(0)
+// Tree用法
+let t = new Tree()
+t.insert(3)
+t.insert(8)
+t.insert(1)
+t.insert(2)
+t.insert(5)
+t.insert(7)
+t.insert(6)
+t.insert(0)
 // console.log(t.root)
 // console.log(t.preOrder(t.root))
 // console.log(t.getMax())
 // console.log(t.getNode(5, t.root))
 
-module.exports = Tree
+exports.Tree = Tree //CommonJS导出
+exports.t = t

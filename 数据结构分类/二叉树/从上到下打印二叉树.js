@@ -1,4 +1,5 @@
 /**
+ * 广度优先遍历
  * BFS==queue
  * @param root
  * @returns {[]}
