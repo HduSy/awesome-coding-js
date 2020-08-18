@@ -1,12 +1,8 @@
-let arr = [1, 2, 3]
+let arr = [1, 3, 3, 3, 3, 4, 5]
 
-function test() {
-    for (var i = 0; i < arr.length; i++) {
-        arr[i] = (function (j) {
-            return () => console.log(j)
-        })(i)
-    }
+function GetNumberOfK(data, k) {
+    // write code here
+    return data.lastIndexOf(k) - data.indexOf(k) + 1
 }
 
-test()
-arr[1]()
+console.log(GetNumberOfK(arr, 2))
