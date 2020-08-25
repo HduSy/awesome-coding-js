@@ -30,4 +30,16 @@ function cutRope(number) {
     return max
 }
 
+function cutRope(number) {
+    // write code here
+    let threeNum = 0
+    if (number < 4) return number - 1
+    if (number === 4) return 4
+    while (number > 4) {
+        threeNum++
+        number -= 3
+    }
+    return Math.pow(3, threeNum) * number
+}
+
 console.log(cutRope(15))
