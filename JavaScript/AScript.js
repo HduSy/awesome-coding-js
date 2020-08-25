@@ -1,39 +1,39 @@
-function foo(a) {
-    var b = 2;
+function myCall(context, ...args) {
+    if (this instanceof Function.prototype)
+        return undefined
+    context = context || window
+    let fn = Symbol()
+    context[fn] = this
+    let res = context[fn](...args)
+    delete context[fn]
+    return res
+}
 
-    function c() {
+function myApply(context, args) {
+    if (this instanceof Function.prototype)
+        return undefined
+    context = context || window
+    let fn = Symbol()
+    context[fn] = this
+    let res
+    if (!Array.isArray(args)) {
+        res = context[fn]()
+    } else {
+        res = context[fn](...args)
     }
-
-    var d = function () {
-    };
-
-    b = 3;
-
+    delete context[fn]
+    return res
 }
 
-foo(1)
-
-AO = {
-    arguments: {
-        0: 1,
-        length: 1
-    },
-    a: 1,
-    b: undefined,
-    c: function c() {
-    },
-    d: undefined
+function myBind(context, ...args1) {
+    if (this instanceof Function.prototype)
+        return undefined
+    let that = this
+    return function F(...args2) {
+        if (this instanceof F) {
+            return new that(...args1, ...args2)
+        } else {
+            return that.apply(context, args1.concat(args2))
+        }
+    }
 }
-
-let arr = [0, 1, 2, 3, 4]
-let arrLike = {
-    0: 0,
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4,
-    length: 5
-}
-
-console.log(Array.prototype.slice.call(arrLike))
-console.log(Array.prototype.splice.call(arrLike, 0, 4))

@@ -10,6 +10,7 @@ Function.prototype.myBind = function (context, ...args1) {
     let that = this //调用此方法的函数
     return function F(...args2) { //返回的函数能接收更多参数
         if (this instanceof F) {
+            //规范说明，使用new操作符调用bind绑定函数时，第一个参数无效
             return new that(...args1, ...args2)
         } else
             return that.apply(context, args1.concat(args2))
