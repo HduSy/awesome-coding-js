@@ -1,3 +1,5 @@
+[JavaScript六种方式实现继承](https://segmentfault.com/a/1190000016708006)
+
 有下面两个类，下面实现`Man`继承`People`：
 
 ```js
