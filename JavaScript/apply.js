@@ -3,6 +3,7 @@ Function.prototype.myApply = function (context, args) {
         return undefined
     context = context || window
     let fn = Symbol()
+    //this是apply调用者，也就是说一个函数
     context[fn] = this
     let result
     if (Array.isArray(args)) {
