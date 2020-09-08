@@ -1,39 +1,20 @@
-function myCall(context, ...args) {
-    if (this instanceof Function.prototype)
-        return undefined
-    context = context || window
-    let fn = Symbol()
-    context[fn] = this
-    let res = context[fn](...args)
-    delete context[fn]
-    return res
-}
-
-function myApply(context, args) {
-    if (this instanceof Function.prototype)
-        return undefined
-    context = context || window
-    let fn = Symbol()
-    context[fn] = this
-    let res
-    if (!Array.isArray(args)) {
-        res = context[fn]()
-    } else {
-        res = context[fn](...args)
+function deepClone(obj, map = new WeakMap()) {
+    if (!obj) return obj
+    if (obj instanceof Date)
+        return obj
+    if (obj instanceof RegExp)
+        return obj
+    if (typeof obj !== 'object')
+        return obj
+    if (map.get(obj)) {
+        return map.get(obj)
     }
-    delete context[fn]
-    return res
-}
-
-function myBind(context, ...args1) {
-    if (this instanceof Function.prototype)
-        return undefined
-    let that = this
-    return function F(...args2) {
-        if (this instanceof F) {
-            return new that(...args1, ...args2)
-        } else {
-            return that.apply(context, args1.concat(args2))
+    let res = new obj.constructor()
+    map.set(obj, res)
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            res[key] = deepClone(obj[key])
         }
     }
+    return res
 }

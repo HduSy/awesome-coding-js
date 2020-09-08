@@ -1,6 +1,6 @@
 /**
  * 表单验证、输入后搜索、窗口resize
- * ns内不论触发多少次，ns后执行一次，ns期间触发则重新计时
+ * ns后执行一次，ns内不论触发多少次，ns期间触发则重新计时
  * @param fn
  * @param time
  * @returns {function(...[*]=)}
