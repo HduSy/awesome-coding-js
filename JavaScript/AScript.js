@@ -1,20 +1,27 @@
-function deepClone(obj, map = new WeakMap()) {
-    if (!obj) return obj
-    if (obj instanceof Date)
-        return obj
-    if (obj instanceof RegExp)
-        return obj
-    if (typeof obj !== 'object')
-        return obj
-    if (map.get(obj)) {
-        return map.get(obj)
+let images = document.getElementsByTagName('img')
+let n = 0
+
+function throttle(fn, timeout) {
+    let canRun = true;
+    return (...args) => {
+        if (!canRun) return
+        canRun = false
+        setTimeout(() => {
+            fn.apply(this, args)
+            canRun = true
+        }, timeout)
     }
-    let res = new obj.constructor()
-    map.set(obj, res)
-    for (let key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            res[key] = deepClone(obj[key])
-        }
+}
+
+window.addEventListener('scroll', throttle(lazyLoad(), 200))
+
+function lazyLoad() {
+    let seeHeight = window.innerHeight
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    for (let i = 0; i < images.length; i++) {
+        if (images[i].scrollTop < seeHeight + scrollTop)
+            if (images[i].src === 'loading.gif')
+                images[i].src = images[i].getAttribute('data-src')
+        n = i + 1
     }
-    return res
 }
