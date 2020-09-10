@@ -1,27 +1,30 @@
-let images = document.getElementsByTagName('img')
-let n = 0
+let testArr = [1, [2], [3, 4, [5]]]
 
-function throttle(fn, timeout) {
-    let canRun = true;
-    return (...args) => {
-        if (!canRun) return
-        canRun = false
-        setTimeout(() => {
-            fn.apply(this, args)
-            canRun = true
-        }, timeout)
-    }
+//Bilibili面试官周兵提供的方法
+function flat(arr) {
+    let arrStr = arr.toString()
+    return arrStr.split(',').map(Number)
 }
 
-window.addEventListener('scroll', throttle(lazyLoad(), 200))
+flat(testArr)
 
-function lazyLoad() {
-    let seeHeight = window.innerHeight
-    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-    for (let i = 0; i < images.length; i++) {
-        if (images[i].scrollTop < seeHeight + scrollTop)
-            if (images[i].src === 'loading.gif')
-                images[i].src = images[i].getAttribute('data-src')
-        n = i + 1
+function deepFlat(arr) {
+    let res = []
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i]))
+            res = res.concat(deepFlat(arr[i]))
+        else
+            res = res.concat(arr[i])
     }
+    return res
 }
+
+console.log(deepFlat(testArr))
+
+function reduceFlat(arr) {
+    return arr.reduce((pre, cur) => {
+        return Array.isArray(cur) ? pre.concat(reduceFlat(cur)) : pre.concat(cur)
+    }, [])
+}
+
+console.log(reduceFlat(testArr))

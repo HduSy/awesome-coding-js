@@ -70,6 +70,16 @@ function flat(arr) {
 testArr = [1, [2], [3, 4, [5]]]
 console.log(flat(testArr))
 
+//Bilibili面试官周兵提供的方法
+//嵌套数组toString后自动去掉了[]
+function flat(arr) {
+    let arrStr = arr.toString()
+    // console.log(arrStr)
+    return arrStr.split(',').map(Number)
+}
+
+console.log(flat(testArr))
+
 /**
  * deep>1这里传入deep等于1时迷惑了
  * concat能够直接拼接一个数组
