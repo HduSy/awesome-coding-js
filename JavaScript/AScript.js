@@ -1,6 +1,6 @@
 let testArr = [1, [2], [3, 4, [5]]]
 
-//Bilibili面试官周兵提供的方法
+//Bilibili面试官周冰提供的方法
 function flat(arr) {
     let arrStr = arr.toString()
     return arrStr.split(',').map(Number)
