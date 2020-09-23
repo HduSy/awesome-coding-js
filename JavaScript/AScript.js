@@ -1,20 +1,15 @@
-function SingleTon(name) {
-    this.name = name
-    this.instance = null
-}
-
-SingleTon.prototype.getName = function () {
-    return this.name
-}
-SingleTon.getInstance = (function () {
-    let instance = null
-    return (name) => {
-        if (!instance) {
-            instance = new SingleTon(name)
+function preOrder(node) {
+    let stack = []
+    let res = []
+    let current = node
+    while (current || stack.length > 0) {
+        while (current) {
+            stack.push(current)
+            current = current.left
         }
-        return instance
+        current = stack.pop()
+        res.push(current)
+        current = current.right
     }
-})()
-let a = SingleTon.getInstance('haha')
-let b = SingleTon.getInstance('haha')
-console.log(a === b)
+    return res
+}
